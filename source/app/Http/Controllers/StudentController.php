@@ -93,5 +93,42 @@ class StudentController extends Controller
 
     }
 
-    
+    public function edit($id){
+        $student = Student::find($id);
+        if($student){
+            $fields = (object) array(
+                'name' => $student->name,
+                'email' => $student->email,
+                'phone'=> $student->phone,
+                'birth_date'=> $student->birth_date,
+                'gender'=> $student->gender
+            );
+            $http_code = 200;
+            $message ='Editar aluno(a).';
+        }else{
+            $fields = null;
+            $http_code = 404;
+            $message ='Não foi encontrado nenhum(a) aluno(a).';
+        }
+        return response([
+            'data'=>$fields,
+            'message'=>$message
+        ], $http_code);
+    }
+    public function update(Request $request, $id)
+    {
+        $student = Student::find($id);
+        if($student){
+            $http_code = 200;
+            $student->update($request->all());
+            $message = "Os dados do(a) aluno(a) foram atualizados";
+        }else{
+            $http_code = 404;
+            $message = "Aluno(a) não encontrado(a).";
+        }
+        return response([
+            'data'=>$student,
+            'message'=>$message
+        ], $http_code);
+    }
 }
