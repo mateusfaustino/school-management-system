@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStudentsTable extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      *
      * @return void
@@ -16,6 +16,11 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('gender');
+            $table->date('birth_date');
         });
     }
 
