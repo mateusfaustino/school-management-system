@@ -56,4 +56,22 @@ class StudentController extends Controller
             'count'=>$students_count
         ], $http_code);
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required'
+        ]);
+        
+        $student = new Student();
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->phone = $request->phone;
+        $student->birth_date = $request->birth_date;
+        $student->gender = $request->gender;
+        
+        $student->save();
+        return response(['date'=>$student], 201);
+    }
 }

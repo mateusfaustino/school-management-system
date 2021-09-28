@@ -17,10 +17,10 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('phone');
             $table->string('email');
-            $table->string('gender');
-            $table->date('birth_date');
+            $table->string('phone')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
         });
     }
 
