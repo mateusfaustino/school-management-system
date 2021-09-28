@@ -70,8 +70,28 @@ class StudentController extends Controller
         $student->phone = $request->phone;
         $student->birth_date = $request->birth_date;
         $student->gender = $request->gender;
-        
+
         $student->save();
         return response(['date'=>$student], 201);
     }
+
+    public function destroy($id){
+        $student= Student::find($id);
+        if($student){
+            $http_code = 200;
+            $student->delete();
+            $message = "Aluno(a) exclido(a) com sucesso.";
+        }else{
+            $http_code = 404;
+            $message = "Aluno(a) não encontrado(a).";
+        }
+        
+        return response([
+            'data'=>$student,
+            'message'=>$message
+        ], $http_code);
+
+    }
+
+    
 }
